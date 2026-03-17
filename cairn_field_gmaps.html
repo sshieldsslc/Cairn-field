@@ -318,9 +318,12 @@ function openUnlisted(idx){
   }
 
   html+='<div class="ynm-section"><div class="ynm-label">Field Assessment</div><div class="ynm-row">';
-  html+='<button class="ynm-btn '+(st.status==='yes'?'selected-yes':'')+'" onclick="setStatus(&quot;yes&quot;)">✅ Yes</button>';
-  html+='<button class="ynm-btn '+(st.status==='maybe'?'selected-maybe':'')+'" onclick="setStatus(&quot;maybe&quot;)">🤔 Maybe</button>';
-  html+='<button class="ynm-btn '+(st.status==='no'?'selected-no':'')+'" onclick="setStatus(&quot;no&quot;)">❌ No</button>';
+  const yc1=st.status==="yes"?" selected-yes":"";
+  const mc1=st.status==="maybe"?" selected-maybe":"";
+  const nc1=st.status==="no"?" selected-no":"";
+  html+="<button class=\"ynm-btn"+yc1+"\" onclick=\"setStatus('yes')\">✅ Yes</button>";
+  html+="<button class=\"ynm-btn"+mc1+"\" onclick=\"setStatus('maybe')\">🤔 Maybe</button>";
+  html+="<button class=\"ynm-btn"+nc1+"\" onclick=\"setStatus('no')\">❌ No</button>";
   html+='</div></div>';
 
   html+='<div class="notes-section"><div class="notes-label">Field Notes</div>';
@@ -330,7 +333,7 @@ function openUnlisted(idx){
   if(nearby.length>0){
     html+='<div style="margin-top:16px"><div class="sec-title">Nearby Laundromats</div>';
     nearby.forEach(n=>{
-      html+='<div class="nearby-item" onclick="openUnlisted('+n.idx+');closeSheet();setTimeout(()=>openUnlisted('+n.idx+'),100)">';
+      html+='<div class="nearby-item" onclick="openUnlisted('+n.idx+')">';
       html+='<div class="nearby-badge" style="background:'+sc(n.score)+'">'+n.score+'</div>';
       html+='<div><div class="nearby-name">'+n.name+'</div><div class="nearby-dist">'+n.d.toFixed(1)+' mi away</div></div></div>';
     });
@@ -356,7 +359,7 @@ function openListed(idx){
   document.getElementById('sh-addr').textContent=d.location;
 
   let html='';
-  if(isFire)html+='<div class="steve-banner">🔥 On Steve's List — Priority Deal</div>';
+  if(isFire)html+='<div class="steve-banner">🔥 On Steve&#39;s List &#8212; Priority Deal</div>';
 
   html+='<div class="action-row">';
   html+='<a href="https://maps.apple.com/?q='+encodeURIComponent(d.name+' Houston TX')+'" class="action-btn btn-dir"><span class="icon">🗺</span><span class="lbl">Directions</span></a>';
@@ -375,9 +378,12 @@ function openListed(idx){
   html+='<div style="font-size:12px;color:var(--slate);line-height:1.6;background:var(--cream);padding:10px;border-radius:8px;margin-bottom:14px;">'+(d.description||'No description')+'</div>';
 
   html+='<div class="ynm-section"><div class="ynm-label">Deal Assessment</div><div class="ynm-row">';
-  html+='<button class="ynm-btn '+(st.status==='yes'?'selected-yes':'')+'" onclick="setStatus(&quot;yes&quot;)">✅ Pursue</button>';
-  html+='<button class="ynm-btn '+(st.status==='maybe'?'selected-maybe':'')+'" onclick="setStatus(&quot;maybe&quot;)">🤔 Research</button>';
-  html+='<button class="ynm-btn '+(st.status==='no'?'selected-no':'')+'" onclick="setStatus(&quot;no&quot;)">❌ Pass</button>';
+  const yc2=st.status==="yes"?" selected-yes":"";
+  const mc2=st.status==="maybe"?" selected-maybe":"";
+  const nc2=st.status==="no"?" selected-no":"";
+  html+="<button class=\"ynm-btn"+yc2+"\" onclick=\"setStatus('yes')\">✅ Pursue</button>";
+  html+="<button class=\"ynm-btn"+mc2+"\" onclick=\"setStatus('maybe')\">🤔 Research</button>";
+  html+="<button class=\"ynm-btn"+nc2+"\" onclick=\"setStatus('no')\">❌ Pass</button>";
   html+='</div></div>';
 
   html+='<div class="notes-section"><div class="notes-label">Notes</div>';
